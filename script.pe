@@ -1,0 +1,21 @@
+import fontforge
+import os
+
+
+font = fontforge.open('workfile.sfd')
+
+# a = font.createMappedChar('a')
+
+# a.importOutlines('glyphs/a.svg')
+
+for filename in os.listdir("glyphs/"):
+    glyph = font.createChar(int(os.path.splitext(filename)[0], 16))
+    glyph.importOutlines(os.path.join("glyphs/", filename))
+
+# pathlist = Path("glyphs/").glob('**/*.svg')
+# for path in pathlist:
+#     glyph = font.createChar(int(basename(str(path))))
+#     glyph.importOutlines(str(path))
+
+
+font.generate('output.ttf')
